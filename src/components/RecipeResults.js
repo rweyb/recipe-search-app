@@ -13,7 +13,7 @@ export default function SearchResults({ query }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch (`https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?applicationId=1048012658384045599&categoryType=largee${query ? `&query=${query}` : ''}`);
+                const response = await fetch (`https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?applicationId=1048012658384045599&categoryType=large${query ? `&keyword=${query}` : ''}`);
                 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -5,12 +5,13 @@ import SearchBar from '../components/SearchBar';
 
 const fetchRecipe = async (query) => {
 
-    const res = await fetch (`https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?applicationId=1048012658384045599&categoryType=large${query ? `&${query}` : ''}`);
-    if (res.ok) { return res.json() }
-    throw new Error(res.statusText);
+    const url = `https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?applicationId=1048012658384045599&categoryType=large${query ? `&${query}` : ''}`;
+    const res =await fetch(url);
+    if (!res.ok) throw new Error(res.statusText);
+    return res.json() 
 };
 
-export default function RecipeReducer() {
+export default function RecipeSearch() {
     const [query, setQuery] = useState('');
 
     const { data, isLoading, isError, error } = useQuery(['recipe', query], () =>fetchRecipe(query), {
@@ -31,8 +32,8 @@ export default function RecipeReducer() {
     return (
         <>
             <SearchBar onSearch={handleSearch} />
-            {data && Array.isArray(data) && data.map(recipe => (
-                <p key={recipe.id}>{recipe.title}</p>
+            {data && Array.isArray(data.result) && data.result.map(recipe => (
+                <p key={recipe.id}>{recipe.recipeTitle}</p>
         ))}
     </>
     );

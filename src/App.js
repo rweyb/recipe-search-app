@@ -8,7 +8,7 @@ import HomePage from './pages/HomePage';
 import FavoritesPage from './pages/FavoritesPage';
 import RecipePage from './pages/RecipePage';
 import IngredientPage from './pages/IngredientPage'
-import RecipeReducer from './reducers/RecipeReducer';
+import RecipeSearch from './reducers/RecipeSearch';
 
 const queryClient = new QueryClient();
 
@@ -17,11 +17,11 @@ const router = createBrowserRouter(
       <>
       <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='favorites' element={<FavoritesPage />} />
-          <Route path='recipe' element={<RecipePage />} /> 
-          <Route path='ingredient' element={<IngredientPage />} />
-          <Route path='results' element={<RecipeResults />} />
-          <Route path='search' element={<RecipeReducer />} /> 
+          <Route path='/favorites' element={<FavoritesPage />} />
+          <Route path='/recipe' element={<RecipePage />} /> 
+          <Route path='/ingredient' element={<IngredientPage />} />
+          <Route path='/results' element={<RecipeResults />} />
+          <Route path='/search' element={<RecipeSearch />} /> 
     </Route>
       </>
     )

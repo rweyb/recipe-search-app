@@ -20,7 +20,6 @@ const FavoriteButton = () => {
     }
   }, [isFavorite, setCount]);
 
-
   const handleClick = () => {
     setIsFavorite(!isFavorite);
   };

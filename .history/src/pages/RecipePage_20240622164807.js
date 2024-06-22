@@ -66,7 +66,7 @@ export default function RecipePage() {
         ) : (
             <RecipeResults result={data} />
         )}
-            <FavoriteButton onAddFavorite = {addFavorite} onRemoveFavorite = {removeFavorite}/>
+         <FavoriteButton onAddFavorite = {addFavorite} onRemoveFavorite = {removeFavorite}/>
         </div>
     );
 }

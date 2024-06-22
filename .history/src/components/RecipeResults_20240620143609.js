@@ -13,7 +13,7 @@ export default function RecipeResults({ result }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-22.json?key=uXZ4gbqfxRlbBngObyDumSDTOr5OGXRy`);
+                const response = await fetch (`https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=e06e2a5afcf14b52139c1fb6c58e9dbc`);
                 const result = await response.json();
                 setData(result.categories || []);
             } catch (err) {
@@ -36,9 +36,9 @@ export default function RecipeResults({ result }) {
 
     return(
         <div>
-            {data && data.map((item, index) => (
+            {data.map((item, index) => (
             <div key={index}>
-                {item}
+                {item.categoryName}
             </div>
             ))}
         </div>

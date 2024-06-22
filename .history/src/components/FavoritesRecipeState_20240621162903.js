@@ -2,9 +2,13 @@ import { atom, atomFamily, selector } from "recoil";
 
 export const FavoritesRecipeState = atom({
     key: 'FavoritesRecipeState',
-    default: [],
+    default: 0,
 });
 
+export const idsAtom = atom({
+    key: "idsAtom",
+    default: [],
+});
 
 export const FavoritesListAtom = atomFamily({
     key: "FavoritesListAtom",
@@ -14,7 +18,7 @@ export const FavoritesListAtom = atomFamily({
 export const FavoritesSelector = selector({
     key: "FavoritesSelector",
     get: ({ get }) => {
-        const lists = get(FavoritesRecipeState);
+        const lists = get(idsAtom);
         return lists.map(id => get(FavoritesListAtom(id)));
     },
 
@@ -25,7 +29,7 @@ export const FavoritesSelector = selector({
             //新たな（FavoritesListAtom）を生成
             case 'add' :
                 set(FavoritesListAtom(newItem.id), newItem);
-                set(FavoritesRecipeState, lists =>[...lists, newItem.id]);
+                set(idsAtom, lists =>[...lists, newItem.id]);
                 break;
             //既存の項目（idであるFavoritesListAtom）のisDoneプロバディをtrueに
             case 'done' :
@@ -35,7 +39,7 @@ export const FavoritesSelector = selector({
             //id群(idsAtom)から、対応するid値を削除
             case 'remove' :
                 reset(FavoritesListAtom(id));
-                set(FavoritesRecipeState, lists => lists.filter(e => e !== id));
+                set(idsAtom, lists => lists.filter(e => e !== id));
                 break;
                 default :
                 throw new Error('Type is invalid.');
@@ -45,7 +49,28 @@ export const FavoritesSelector = selector({
 
 
 
+/*
+ここは本来、値は配列で持たせましょう。
+（教科書の TODO と同じ考え方です。TODOは、IDとタイトルが含まれたオブジェクトの配列だったと思いますが、
+今回は
 
+            {
+                "categoryId": "31",
+                "categoryName": "定番の肉料理",
+                "categoryUrl": "https://recipe.rakuten.co.jp/category/31/"
+            },
+このような単位のオブジェクトの配列になります。
+）
+
+・上記の例でいうと、"31"のハートを押すと、31のオブジェクトが追加される。
+"31"のハートを解除すると、31のオブジェクトが削除される。
+
+・TODOのmax id を取得するコードが、教科書にはあったと思います。
+今回それは不要ですが、お気に入りリストの件数を返す関数を用意してください。
+
+
+
+*/
 
 
 

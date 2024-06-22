@@ -3,11 +3,21 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 import SearchBar from '../components/SearchBar';
 
+//APIのエンドポイントと開発キー
+const API_ENDPOINT ='きょうの料理レシピレンタル';
+const API_KEY ='MjAyNC8wNi8yMiAwNToyMDoxN2QxYTQyOGE2LThkYzUtNDk1MS1hMzE5LTU4NjVlYWRkODIyOA==';
 
 
 const fetchRecipe = async (query) => {
 
-    const res =await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-22.json?key=uXZ4gbqfxRlbBngObyDumSDTOr5OGXRy${query ? `&query=${query}` : ''}`);
+    const res =await fetch (`${API_ENDPOINT}?key=${API_KEY}&{query=${query}` ,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json',
+            }
+        }
+    );
 
     if (res.ok) { return res.json() }
     throw new Error(res.statusText);
@@ -34,12 +44,8 @@ export default function RecipeReducer() {
     return (
         <>
             <SearchBar onSearch={handleSearch} />
-            {data && data.list && data.list.g1 && data.list.g1.map(program => (
-                <div key={program.id}>
-                    <h3>{program.title}</h3>
-                    <p>{program.subtitle}</p>
-                
-                </div>
+            {data && Array.isArray(data) && data.map(recipe => (
+                <p key={recipe.id}>{recipe.title}</p>
         ))}
     </>
     );

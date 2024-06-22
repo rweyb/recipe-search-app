@@ -34,12 +34,8 @@ export default function RecipeReducer() {
     return (
         <>
             <SearchBar onSearch={handleSearch} />
-            {data && data.list && data.list.g1 && data.list.g1.map(program => (
-                <div key={program.id}>
-                    <h3>{program.title}</h3>
-                    <p>{program.subtitle}</p>
-                
-                </div>
+            {data && Array.isArray(data) && data.map(recipe => (
+                <p key={recipe.id}>{recipe.title}</p>
         ))}
     </>
     );

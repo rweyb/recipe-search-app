@@ -6,8 +6,8 @@ import { FavoritesRecipeState } from './FavoritesRecipeState';
 
 const FavoriteButton = () => {
 
-  const [count, setCount] = useRecoilState(FavoritesRecipeState);
-  const [isFavorite, setIsFavorite] =useState(false);
+  const [, setCount] = useRecoilState(FavoritesRecipeState);
+  const [isFavorite,setIsFavorite] =useState(false);
 
 
   const handleClick = () => {
@@ -29,7 +29,6 @@ const FavoriteButton = () => {
     <button onClick={handleClick} >
       <FaHeart color={isFavorite ? 'red' : 'grey'} />{""} 
       {/* ハートアイコンを表示 */}
-      {count > 0 && <span>{count}</span>}
     </button>
   );
 };

@@ -5,14 +5,10 @@ import { useRecoilValue } from 'recoil';
 import { FavoritesRecipeState } from './FavoritesRecipeState';
 import { Link } from 'react-router-dom';
 
-
 export default function Header() {
 
-     // FavoritesRecipeState atomからお気に入りレシピのIDの配列を取得
-    const favoritesIds = useRecoilValue(FavoritesRecipeState);
+const favoritesCount = useRecoilValue(FavoritesRecipeState);
 
-  // お気に入りレシピの数を計算
-    const favoritesCount = favoritesIds.length;
 
 
     const headerStyle = {
@@ -41,16 +37,12 @@ export default function Header() {
     <>
     <header style={headerStyle}>
     <div style={logoAndTitleStyle}>
-        <Link to="/">
-        <img src={logo2} style={logoStyle} alt="レシピ"  />
-        </Link>
-        
+        <img src={logo2} style={logoStyle} alt="レシピ" onClick={handleLogoClick} />
         <h1 style={{margin: '0'}}>レシピ検索アプリ</h1>
     </div>
-        <Link to="/favorites">
-        <Button variant='contained'>{favoritesCount}</Button>
-        </Link>
-        
+
+        <Button variant='contained' onClick={handleClick}>{favoritesCount}</Button>
+
     </header>
     </>
     );

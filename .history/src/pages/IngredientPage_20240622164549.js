@@ -16,12 +16,12 @@ export default function RecipePage() {
     //お気に入り
     const [favorites, setFavorites] =useRecoilState(FavoritesRecipeState);
 
-    const handleSearch = async (menu) => {
+    const handleSearch = async (ingredient) => {
         setLoading(true);
         try {
             const response = await fetch(
             `https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-22.json?key=uXZ4gbqfxRlbBngObyDumSDTOr5OGXRy${
-                menu ? `&query=${menu}` : ""
+                ingredient ? `&query=${ingredient}` : ""
             }`
         );
 
@@ -55,18 +55,19 @@ export default function RecipePage() {
         setFavorites(favorites.filter(id => id !== programID));
     };
 
+
     return (
         <div>
-        <h1>メニューで選ぶ</h1>
-        <SearchBar onSearch={handleSearch} />
-        {isLoading ? (
+            <h1>食材で選ぶ</h1>
+            <SearchBar onSearch={handleSearch} />
+            {isLoading ? (
             <p>ローディング中</p>
-        ) : error ? (
+            ) : error ? (
             <p>{error}</p>
-        ) : (
+            ) : (
             <RecipeResults result={data} />
-        )}
+            )}
             <FavoriteButton onAddFavorite = {addFavorite} onRemoveFavorite = {removeFavorite}/>
         </div>
-    );
-}
+        );
+    }

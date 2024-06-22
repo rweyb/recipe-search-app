@@ -29,7 +29,6 @@ const FavoriteButton = () => {
     <button onClick={handleClick} >
       <FaHeart color={isFavorite ? 'red' : 'grey'} />{""} 
       {/* ハートアイコンを表示 */}
-      {count > 0 && <span>{count}</span>}
     </button>
   );
 };

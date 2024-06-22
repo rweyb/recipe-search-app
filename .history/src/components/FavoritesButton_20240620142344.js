@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa'; // react-iconsライブラリからFaHeartアイコンをインポート
 import { useRecoilState } from 'recoil';
 import { FavoritesRecipeState } from './FavoritesRecipeState';
@@ -6,12 +6,11 @@ import { FavoritesRecipeState } from './FavoritesRecipeState';
 
 const FavoriteButton = () => {
 
-  const [count, setCount] = useRecoilState(FavoritesRecipeState);
-  const [isFavorite, setIsFavorite] =useState(false);
+  const [, setCount] = useRecoilState(FavoritesRecipeState);
+  const [isFavorite,setIsFavorite] =useState(false);
 
 
   const handleClick = () => {
-
    // カウントを増減する前に、isFavoriteの現在の値を確認
   if (!isFavorite) {
     console.log("isFavorite:true");
@@ -22,14 +21,14 @@ const FavoriteButton = () => {
     // isFavoriteがfalseの場合、カウントが0より大きい場合のみ1減らす
     setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
   }
-  setIsFavorite((isFavorite) => !isFavorite);
+
+
+    setIsFavorite(!isFavorite);
   };
 
   return (
     <button onClick={handleClick} >
-      <FaHeart color={isFavorite ? 'red' : 'grey'} />{""} 
-      {/* ハートアイコンを表示 */}
-      {count > 0 && <span>{count}</span>}
+      <FaHeart color={isFavorite ? 'red' : 'grey'} /> {/* ハートアイコンを表示 */}
     </button>
   );
 };

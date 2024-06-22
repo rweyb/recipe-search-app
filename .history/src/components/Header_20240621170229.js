@@ -8,12 +8,7 @@ import { Link } from 'react-router-dom';
 
 export default function Header() {
 
-     // FavoritesRecipeState atomからお気に入りレシピのIDの配列を取得
-    const favoritesIds = useRecoilValue(FavoritesRecipeState);
-
-  // お気に入りレシピの数を計算
-    const favoritesCount = favoritesIds.length;
-
+const favoritesCount = useRecoilValue();
 
     const headerStyle = {
         display: 'flex', // フレックスボックスを使用

@@ -3,17 +3,17 @@ import logo2 from '../logo/logo2.png';
 import { Button } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { FavoritesRecipeState } from './FavoritesRecipeState';
-import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+const navigate = useNavigate();
+const favoritesCount = useRecoilValue(FavoritesRecipeState);
 
-     // FavoritesRecipeState atomからお気に入りレシピのIDの配列を取得
-    const favoritesIds = useRecoilValue(FavoritesRecipeState);
+//お気に入りのナビゲーション
+const handleClick = () => navigate('/favorites');
 
-  // お気に入りレシピの数を計算
-    const favoritesCount = favoritesIds.length;
-
+//ロゴをクリックしたときのナビゲート
+const handleLogoClick = () => navigate(-1);
 
     const headerStyle = {
         display: 'flex', // フレックスボックスを使用
@@ -41,16 +41,12 @@ export default function Header() {
     <>
     <header style={headerStyle}>
     <div style={logoAndTitleStyle}>
-        <Link to="/">
-        <img src={logo2} style={logoStyle} alt="レシピ"  />
-        </Link>
-        
+        <img src={logo2} style={logoStyle} alt="レシピ" onClick={handleLogoClick} />
         <h1 style={{margin: '0'}}>レシピ検索アプリ</h1>
     </div>
-        <Link to="/favorites">
-        <Button variant='contained'>{favoritesCount}</Button>
-        </Link>
-        
+
+        <Button variant='contained' onClick={handleClick}>{favoritesCount}</Button>
+
     </header>
     </>
     );

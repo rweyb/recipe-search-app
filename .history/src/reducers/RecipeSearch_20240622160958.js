@@ -38,7 +38,7 @@ export default function RecipeReducer() {
                 <div key={program.id}>
                     <h3>{program.title}</h3>
                     <p>{program.subtitle}</p>
-                
+                    // ここにレシピ情報を表示するコードを追加
                 </div>
         ))}
     </>

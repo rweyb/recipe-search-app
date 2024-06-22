@@ -2,9 +2,13 @@ import { atom, atomFamily, selector } from "recoil";
 
 export const FavoritesRecipeState = atom({
     key: 'FavoritesRecipeState',
-    default: [],
+    default: 0,
 });
 
+export const idsAtom = atom({
+    key: "idsAtom",
+    default: [],
+});
 
 export const FavoritesListAtom = atomFamily({
     key: "FavoritesListAtom",
@@ -14,7 +18,7 @@ export const FavoritesListAtom = atomFamily({
 export const FavoritesSelector = selector({
     key: "FavoritesSelector",
     get: ({ get }) => {
-        const lists = get(FavoritesRecipeState);
+        const lists = get(idsAtom);
         return lists.map(id => get(FavoritesListAtom(id)));
     },
 
@@ -25,7 +29,7 @@ export const FavoritesSelector = selector({
             //新たな（FavoritesListAtom）を生成
             case 'add' :
                 set(FavoritesListAtom(newItem.id), newItem);
-                set(FavoritesRecipeState, lists =>[...lists, newItem.id]);
+                set(idsAtom, lists =>[...lists, newItem.id]);
                 break;
             //既存の項目（idであるFavoritesListAtom）のisDoneプロバディをtrueに
             case 'done' :
@@ -35,7 +39,7 @@ export const FavoritesSelector = selector({
             //id群(idsAtom)から、対応するid値を削除
             case 'remove' :
                 reset(FavoritesListAtom(id));
-                set(FavoritesRecipeState, lists => lists.filter(e => e !== id));
+                set(idsAtom, lists => lists.filter(e => e !== id));
                 break;
                 default :
                 throw new Error('Type is invalid.');

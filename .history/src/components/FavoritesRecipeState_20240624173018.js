@@ -19,7 +19,7 @@ export const FavoritesSelector = selector({
     key: "FavoritesSelector",
     get: ({ get }) => {
         const lists = get(FavoritesRecipeState);
-        return lists.map(id => get(FavoritesListAtom(id))).filter(item => item !== null);
+        return lists.map((id) => get(FavoritesListAtom(id)));
     },
 
     //リストの追加/完了済/削除操作

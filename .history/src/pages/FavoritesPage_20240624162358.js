@@ -1,28 +1,28 @@
 import React from "react";
 import FavoriteButton from "../components/FavoritesButton";
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { FavoritesRecipeState, FavoritesSelector } from '../components/FavoritesRecipeState';
-
-
+import { FavoritesRecipeState, FavoritesListAtom, FavoritesSelector } from '../components/FavoritesRecipeState';
 
 const FavoritesPage = () => {
 
     // Recoilの状態更新関数を取得
-    const setFavoritesList = useSetRecoilState(FavoritesRecipeState);
+        const setFavoritesList = useSetRecoilState(FavoritesRecipeState);
+        const setFavoriteItem = useSetRecoilState(FavoritesListAtom);
 
-
-    // Recoilからお気に入りのリストを取得
+         // Recoilからお気に入りのリストを取得
     const favorites = useRecoilValue(FavoritesSelector);
-
-    // お気に入り追加
-    const addFavorite = (newItem) => {
-        setFavoritesList((lists) => [...lists, newItem.id]);
-    };
-
-    // お気に入りから削除
-    const removeFavorite = (id) => {
-        setFavoritesList((lists) => lists.filter((favId) => favId !== id));
-    };
+    
+        //お気に入り追加
+        const addFavorite = (newItem) => {
+            setFavoriteItem(newItem.id, newItem);
+            setFavoritesList(lists => [...lists, newItem.id]);
+        };
+    
+        //お気に入りから削除
+        const removeFavorite = (id) => {
+            setFavoriteItem(id, null); // アイテムをnullに設定して削除
+            setFavoritesList(lists => lists.filter(favId => favId !== id));
+        };
     
 
         return (
@@ -50,4 +50,3 @@ const FavoritesPage = () => {
 
 
 export default FavoritesPage;
-

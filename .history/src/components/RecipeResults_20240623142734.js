@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import FavoriteButton from "./FavoritesButton";
 
 
-export default function RecipeResults({ result, onAddFavorite, onRemoveFavorite }) {
+
+export default function RecipeResults({ result }) {
 
     const [data, setData] =useState(null);
     const [isLoading, setLoading] =useState(true);
@@ -13,7 +13,7 @@ export default function RecipeResults({ result, onAddFavorite, onRemoveFavorite 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/e1/0205/2024-06-25.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS`);
+                const response = await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-23.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS`);
                 const result = await response.json();
                 setData(result.categories || []);
             } catch (err) {
@@ -36,8 +36,8 @@ export default function RecipeResults({ result, onAddFavorite, onRemoveFavorite 
 
     return(
         <div>
-        {data &&
-            data.map((item, index) => (
+        {result &&
+            result.map((item, index) => (
             <div key={index}>
                 <div>{item.id}</div>
                 <div>{item.service.name}</div>
@@ -48,8 +48,6 @@ export default function RecipeResults({ result, onAddFavorite, onRemoveFavorite 
                     alt={""}
                 />
                 <div>{item.title}</div>
-                <FavoriteButton recipeId={item.id} onAddFavorite={onAddFavorite} onRemoveFavorite={onRemoveFavorite} />
-
             </div>
             ))}
         </div>

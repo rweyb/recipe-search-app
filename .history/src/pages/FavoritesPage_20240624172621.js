@@ -1,15 +1,11 @@
 import React from "react";
 import FavoriteButton from "../components/FavoritesButton";
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { FavoritesRecipeState, FavoritesSelector } from '../components/FavoritesRecipeState';
+import { FavoritesRecipeState, FavoritesListAtom, FavoritesSelector } from '../components/FavoritesRecipeState';
 
 
 
 const FavoritesPage = () => {
-
-    // Recoilの状態更新関数を取得
-    const setFavoritesList = useSetRecoilState(FavoritesRecipeState);
-
 
     // Recoilからお気に入りのリストを取得
     const favorites = useRecoilValue(FavoritesSelector);

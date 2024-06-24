@@ -1,7 +1,7 @@
 import React from "react";
 import FavoriteButton from "../components/FavoritesButton";
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { FavoritesRecipeState, FavoritesSelector } from '../components/FavoritesRecipeState';
+import { FavoritesRecipeState, FavoritesListAtom, FavoritesSelector } from '../components/FavoritesRecipeState';
 
 
 

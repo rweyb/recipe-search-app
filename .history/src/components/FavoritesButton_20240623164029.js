@@ -12,18 +12,13 @@ const FavoriteButton = ({ recipeId, onAddFavorite, onRemoveFavorite }) => {
   const handleClick = () => {
     if (isFavorite) {
       // お気に入りから削除
-      const newFavorites = favorites.filter(id => id !== recipeId);
-      setFavorites(newFavorites);
-      console.log('お気に入りから削除:', newFavorites);
       onRemoveFavorite(recipeId);
     } else {
       // お気に入りに追加
-      const newFavorites = [...favorites, recipeId];
-      setFavorites(newFavorites);
-      console.log('お気に入りに追加:', newFavorites);
       onAddFavorite(recipeId);
     }
   };
+
 
   return (
     <button onClick={handleClick}>

@@ -1,25 +1,21 @@
 import { atom, atomFamily, selector } from "recoil";
 
-
-//お気に入りレシピIDの配列を保持
 export const FavoritesRecipeState = atom({
     key: 'FavoritesRecipeState',
     default: [],
 });
 
-//特定のIDに基づいて個々のレシピの詳細情報を保持
+
 export const FavoritesListAtom = atomFamily({
     key: "FavoritesListAtom",
     default: null
 });
 
-
-//FavoritesRecipeStateとFavoritesListAtomから派生した詳細情報を保持
 export const FavoritesSelector = selector({
     key: "FavoritesSelector",
     get: ({ get }) => {
         const lists = get(FavoritesRecipeState);
-        return lists.map(id => get(FavoritesListAtom(id))).filter(item => item !== null);
+        return lists.map(id => get(FavoritesListAtom(id)));
     },
 
     //リストの追加/完了済/削除操作

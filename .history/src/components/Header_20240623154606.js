@@ -47,11 +47,9 @@ export default function Header() {
         <h1 style={{margin: '0'}}>レシピ検索アプリ</h1>
     </div>
         <Link to="/favorites">
-        <Button variant='contained'>
-            <FaHeart />
-            {favoritesCount}
-        </Button>
+        <Button variant='contained'>{favoritesCount}</Button>
         </Link>
+        
     </header>
     </>
     );

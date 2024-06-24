@@ -7,7 +7,7 @@ import SearchBar from '../components/SearchBar';
 
 const fetchRecipe = async (query) => {
 
-    const res =await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/e1/0205/2024-06-25.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS${query ? `&query=${encodeURIComponent(query)}` : ''}`);
+    const res =await fetch (`https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-23.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS${query ? `&query=${query}` : ''}`);
 
     if (res.ok) { return res.json() }
     throw new Error(res.statusText);

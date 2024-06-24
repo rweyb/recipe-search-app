@@ -20,7 +20,7 @@ export default function IngredientPage() {
         setLoading(true);
         try {
             const response = await fetch(
-            `https://api.nhk.or.jp/v2/pg/genre/130/e1/0205/2024-06-25.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS${
+            `https://api.nhk.or.jp/v2/pg/genre/130/g1/0205/2024-06-23.json?key=uy1Ny9L1WFB2F1sY6HGzZj933YbxkgpS${
                 ingredient ? `&query=${encodeURIComponent(ingredient)}` : ""
             }`
         );

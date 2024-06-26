@@ -1,11 +1,29 @@
 import React from 'react';
 import logo2 from '../logo/logo2.png';
 import { Button } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import { FavoritesRecipeState, FavoritesSelector } from './FavoritesRecipeState';
 import { Link } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
-import FavoritesCount from './FavoritesCount'; 
+import { useRecoilCallback } from 'recoil';
+
 
 export default function Header() {
+
+     // FavoritesRecipeState atomからお気に入りレシピのIDの配列を取得
+    const favoritesIds = useRecoilValue(FavoritesRecipeState);
+
+  // お気に入りレシピの数を計算
+    const favoritesCount = favoritesIds.length; 
+
+    const addFavorite = useRecoilCallback(({ set }) => (newItem) => {
+        set(FavoritesSelector, { type: 'add', newItem});
+    });
+
+    // お気に入りボタンのクリックイベントハンドラー
+    const handleFavoriteClick = (recipe) => {
+        addFavorite(recipe);
+    };
 
 
     const headerStyle = {
@@ -42,7 +60,7 @@ export default function Header() {
         <Link to="/favorites">
         <Button variant='contained'>
             <FaHeart />
-            <FavoritesCount />
+            {favoritesCount}
         </Button>
         </Link>
     </header>
